@@ -1,0 +1,57 @@
+{
+	"identifier": "Level_1",
+	"uniqueIdentifer": "b277c5f0-8990-11ee-b344-61d1f38bd417",
+	"x": -1,
+	"y": -1,
+	"width": 256,
+	"height": 128,
+	"bgColor": "#696A79",
+	"neighbourLevels": [],
+	"customFields" : {},
+	"layers": [
+		"AutoLayer.png"
+	],
+	"entities": {
+		"Block": [
+			{
+				"id": "Block",
+				"iid": "ccf64e10-8990-11ee-b344-633f4c9259be",
+				"layer": "Entities",
+				"x": 96,
+				"y": 32,
+				"width": 64,
+				"height": 64,
+				"color": 39387,
+				"customFields": {
+					"Type": "AntiGravity"
+				}
+			}
+		],
+		"Portal": [
+			{
+				"id": "Portal",
+				"iid": "4e697ee0-8990-11ee-b344-076caf7aea19",
+				"layer": "Entities",
+				"x": 208,
+				"y": 80,
+				"width": 16,
+				"height": 16,
+				"color": 39387,
+				"customFields" : {}
+			}
+		],
+		"Player": [
+			{
+				"id": "Player",
+				"iid": "78f956d0-8990-11ee-b344-3f57e2964777",
+				"layer": "Entities",
+				"x": 32,
+				"y": 80,
+				"width": 16,
+				"height": 16,
+				"color": 4098376,
+				"customFields" : {}
+			}
+		]
+	}
+}

@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  kaboom:
+    specifier: ^3000.1.17
+    version: 3000.1.17
+
 devDependencies:
   typescript:
     specifier: ^5.2.2
@@ -363,6 +368,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /kaboom@3000.1.17:
+    resolution: {integrity: sha512-npAtjGxj9Oj9vLpXfURck9eUPHR2ac1Lhc1bNcZ0NWcs+Lgs40Ty+wjujv1C2DwjWvxaX+3r2G64M35BS/Ry2g==}
+    dev: false
 
   /nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}

@@ -1,0 +1,96 @@
+{
+	"identifier": "Level_5",
+	"uniqueIdentifer": "b31b05a0-8990-11ee-9916-bb585c14c63a",
+	"x": -1,
+	"y": -1,
+	"width": 256,
+	"height": 304,
+	"bgColor": "#696A79",
+	"neighbourLevels": [],
+	"customFields" : {},
+	"layers": [
+		"AutoLayer.png"
+	],
+	"entities": {
+		"Player": [
+			{
+				"id": "Player",
+				"iid": "bb77d480-8990-11ee-9916-bd5259bd5c96",
+				"layer": "Entities",
+				"x": 32,
+				"y": 256,
+				"width": 16,
+				"height": 16,
+				"color": 4098376,
+				"customFields" : {}
+			}
+		],
+		"Block": [
+			{
+				"id": "Block",
+				"iid": "c8052db0-8990-11ee-9916-a7f7dfaf1d33",
+				"layer": "Entities",
+				"x": 96,
+				"y": 208,
+				"width": 64,
+				"height": 64,
+				"color": 14120515,
+				"customFields": {
+					"Type": "Gravity"
+				}
+			},
+			{
+				"id": "Block",
+				"iid": "cf5176f0-8990-11ee-9916-05d9d6991cb0",
+				"layer": "Entities",
+				"x": 96,
+				"y": 144,
+				"width": 64,
+				"height": 64,
+				"color": 14120515,
+				"customFields": {
+					"Type": "Gravity"
+				}
+			},
+			{
+				"id": "Block",
+				"iid": "d043c630-8990-11ee-9916-55e14508bc8c",
+				"layer": "Entities",
+				"x": 96,
+				"y": 80,
+				"width": 64,
+				"height": 64,
+				"color": 14120515,
+				"customFields": {
+					"Type": "Gravity"
+				}
+			},
+			{
+				"id": "Block",
+				"iid": "d1078b60-8990-11ee-9916-c3e70c32567b",
+				"layer": "Entities",
+				"x": 96,
+				"y": 16,
+				"width": 64,
+				"height": 64,
+				"color": 14120515,
+				"customFields": {
+					"Type": "Gravity"
+				}
+			}
+		],
+		"Portal": [
+			{
+				"id": "Portal",
+				"iid": "d57ce6e0-8990-11ee-9916-f9e1a8f06f68",
+				"layer": "Entities",
+				"x": 208,
+				"y": 256,
+				"width": 16,
+				"height": 16,
+				"color": 39387,
+				"customFields" : {}
+			}
+		]
+	}
+}

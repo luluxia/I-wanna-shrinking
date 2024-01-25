@@ -1,0 +1,57 @@
+{
+	"identifier": "Level_4",
+	"uniqueIdentifer": "92625e40-8990-11ee-84aa-bb0bc2ddb700",
+	"x": -1,
+	"y": -1,
+	"width": 256,
+	"height": 304,
+	"bgColor": "#696A79",
+	"neighbourLevels": [],
+	"customFields" : {},
+	"layers": [
+		"AutoLayer.png"
+	],
+	"entities": {
+		"Player": [
+			{
+				"id": "Player",
+				"iid": "66a13860-8990-11ee-9916-217cfa2fc391",
+				"layer": "Entities",
+				"x": 48,
+				"y": 96,
+				"width": 16,
+				"height": 16,
+				"color": 4098376,
+				"customFields" : {}
+			}
+		],
+		"Block": [
+			{
+				"id": "Block",
+				"iid": "6834d0b0-8990-11ee-9916-8378c1440c79",
+				"layer": "Entities",
+				"x": 80,
+				"y": 16,
+				"width": 96,
+				"height": 96,
+				"color": 14120515,
+				"customFields": {
+					"Type": "Gravity"
+				}
+			}
+		],
+		"Portal": [
+			{
+				"id": "Portal",
+				"iid": "a9d92ac0-8990-11ee-9916-377dc545cfb5",
+				"layer": "Entities",
+				"x": 192,
+				"y": 256,
+				"width": 16,
+				"height": 16,
+				"color": 39387,
+				"customFields" : {}
+			}
+		]
+	}
+}

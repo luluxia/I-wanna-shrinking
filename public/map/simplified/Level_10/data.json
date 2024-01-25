@@ -1,0 +1,109 @@
+{
+	"identifier": "Level_10",
+	"uniqueIdentifer": "5c34cd00-8990-11ee-84aa-87d0b31abf46",
+	"x": -1,
+	"y": -1,
+	"width": 464,
+	"height": 320,
+	"bgColor": "#696A79",
+	"neighbourLevels": [],
+	"customFields" : {},
+	"layers": [
+		"AutoLayer.png"
+	],
+	"entities": {
+		"Block": [
+			{
+				"id": "Block",
+				"iid": "515fb5b0-8990-11ee-84aa-0574fc0095ba",
+				"layer": "Entities",
+				"x": 64,
+				"y": 176,
+				"width": 192,
+				"height": 48,
+				"color": 14120515,
+				"customFields": {
+					"Type": "Gravity"
+				}
+			},
+			{
+				"id": "Block",
+				"iid": "58db0060-8990-11ee-84aa-9d860160028b",
+				"layer": "Entities",
+				"x": 288,
+				"y": 240,
+				"width": 48,
+				"height": 48,
+				"color": 14120515,
+				"customFields": {
+					"Type": "Gravity"
+				}
+			},
+			{
+				"id": "Block",
+				"iid": "5ae99510-8990-11ee-84aa-e51e483374c9",
+				"layer": "Entities",
+				"x": 304,
+				"y": 192,
+				"width": 48,
+				"height": 48,
+				"color": 14120515,
+				"customFields": {
+					"Type": "Gravity"
+				}
+			},
+			{
+				"id": "Block",
+				"iid": "cb6f9500-8990-11ee-84aa-e7a034003c0b",
+				"layer": "Entities",
+				"x": 64,
+				"y": 80,
+				"width": 192,
+				"height": 48,
+				"color": 14120515,
+				"customFields": {
+					"Type": "Gravity"
+				}
+			},
+			{
+				"id": "Block",
+				"iid": "3b9facc0-8990-11ee-84aa-ad7617649613",
+				"layer": "Entities",
+				"x": 320,
+				"y": 128,
+				"width": 64,
+				"height": 64,
+				"color": 14120515,
+				"customFields": {
+					"Type": "Gravity"
+				}
+			}
+		],
+		"Player": [
+			{
+				"id": "Player",
+				"iid": "86a5ad70-8990-11ee-84aa-75b12eca06fe",
+				"layer": "Entities",
+				"x": 32,
+				"y": 272,
+				"width": 16,
+				"height": 16,
+				"color": 4098376,
+				"customFields" : {}
+			}
+		],
+		"Portal": [
+			{
+				"id": "Portal",
+				"iid": "8e4ed1d0-8990-11ee-84aa-ad9b027f9bf9",
+				"layer": "Entities",
+				"x": 32,
+				"y": 144,
+				"width": 16,
+				"height": 16,
+				"color": 39387,
+				"customFields" : {}
+			}
+		]
+	}
+}

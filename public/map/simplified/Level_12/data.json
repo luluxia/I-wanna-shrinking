@@ -1,0 +1,29 @@
+{
+	"identifier": "Level_12",
+	"uniqueIdentifer": "31285090-b0a0-11ee-b0df-77362d1252a2",
+	"x": -1,
+	"y": -1,
+	"width": 432,
+	"height": 112,
+	"bgColor": "#696A79",
+	"neighbourLevels": [],
+	"customFields" : {},
+	"layers": [
+		"AutoLayer.png"
+	],
+	"entities": {
+		"Player": [
+			{
+				"id": "Player",
+				"iid": "6329fb20-b0a0-11ee-b0df-1b355d01d500",
+				"layer": "Entities",
+				"x": 208,
+				"y": 64,
+				"width": 16,
+				"height": 16,
+				"color": 4098376,
+				"customFields" : {}
+			}
+		]
+	}
+}
