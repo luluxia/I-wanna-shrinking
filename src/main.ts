@@ -10,6 +10,8 @@ const state = {
   showTransition: false,
   transitionTime: 0,
 }
+let staticDataList: string[][] = []
+let mapDataList: any[] = []
 // k.debug.inspect = true
 k.setGravity(1500)
 
@@ -59,9 +61,28 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
   return origColor;
 }
 `);
-Array.from({ length: 13 }).forEach((_, i) => {
-  k.loadSprite(`map${i}`, `map/simplified/Level_${i}/AutoLayer.png`)
-})
+k.load(new Promise<void>(async resolve => {
+  const fetchPromises = Array.from({ length: 13 }).map(async (_, i) => {
+    k.loadSprite(`map${i}`, `map/simplified/Level_${i}/AutoLayer.png`)
+    await fetch(`map/simplified/Level_${i}/Static.csv`, {
+      headers: {
+        'Content-Type': 'text/csv',
+      }
+    }).then(res => res.text()).then(data => {
+      const staticData = data.split('\n').map((row: string) => row.replace(/,/g, ''))
+      staticDataList.push(staticData)
+    })
+    await fetch(`map/simplified/Level_${i}/data.json`)
+    .then(res => res.json())
+    .then(data => {
+      mapDataList.push(data)
+    })
+  })
+
+  await Promise.all(fetchPromises)
+  resolve()
+  k.go('game', 0)
+}))
 
 k.scene('game', (mapId: number) => {
   // 初始化背景
@@ -155,93 +176,85 @@ k.scene('game', (mapId: number) => {
     k.scale(4),
   ])
   // 解析固态层
-  fetch(`map/simplified/Level_${mapId}/Static.csv`, {
-    headers: {
-      'Content-Type': 'text/csv',
+  k.addLevel(staticDataList[mapId], {
+    tileWidth: 64,
+    tileHeight: 64,
+    tiles: {
+      '1': () => [
+        k.rect(64, 64, { fill: false }),
+        k.area(),
+        k.body({ isStatic: true }),
+        'ground',
+      ]
     }
-  }).then(res => res.text()).then(data => {
-    const staticData = data.split('\n').map((row: string) => row.replace(/,/g, ''))
-    k.addLevel(staticData, {
-      tileWidth: 64,
-      tileHeight: 64,
-      tiles: {
-        '1': () => [
-          k.rect(64, 64, { fill: false }),
-          k.area(),
-          k.body({ isStatic: true }),
-          'ground',
-        ]
-      }
-    })
   })
   // 解析地图数据
-  fetch(`map/simplified/Level_${mapId}/data.json`).then(res => res.json()).then(data => {
-    Object.keys(data.entities).forEach(key => {
-      // 出生点
-      if (key === 'Player') {
-        const playerData = data.entities[key][0]
-        player.pos = k.vec2(playerData.x + 8, playerData.y + 8).scale(4)
-        k.camPos(player.pos)
-      }
-      // 方块
-      if (key === 'Block') {
-        data.entities[key].forEach((blockData: any) => {
-          const type = blockData.customFields.Type
-          const block = k.add([
-            k.rect(blockData.width * 4, blockData.height * 4),
-            k.outline(4, k.rgb(84, 84, 84)),
-            k.area(),
-            k.body(),
-            k.pos(k.vec2(blockData.x + blockData.width / 2, blockData.y + blockData.height / 2).scale(4)),
-            k.anchor('center'),
-            'block',
-          ])
-          if (type === 'Gravity') {
-            block.use(k.color(166, 85, 95))
-          } else if (type === 'AntiGravity') {
-            block.use(k.color(74, 188, 255))
-            block.use(k.body({ gravityScale: 0, mass: 100 }))
-            
-            block.onUpdate(() => {
-              block.vel.y = -100
-              // block.move(0, -200)
-            })
-          }
-        })
-        // player.onCollide('block', (block) => {
-        //   block.use(k.body({ isStatic: true }))
-        // })
-        // player.onCollideEnd('block', (block) => {
-        //   block.use(k.body())
-        // })
-      }
-      // 传送门
-      if (key === 'Portal') {
-        data.entities[key].forEach((protalData: any) => {
-          k.add([
-            k.sprite('portal'),
-            k.pos(k.vec2(protalData.x + 8, protalData.y + 8).scale(4)),
-            k.anchor('center'),
-            k.area(),
-            k.body({ isStatic: true }),
-            'portal',
-          ])
-        })
-        player.onCollide('portal', () => {
-          if (state.showTransition) {
-            return
-          }
-          state.showTransition = true
-          state.transitionTime = 0
-          setTimeout(() => {
-            k.go('game', mapId + 1)
-          }, 1000)
-          setTimeout(() => {
-            state.showTransition = false
-          }, 2000)
-        })
-      }
-    })
+  const data = mapDataList[mapId]
+  Object.keys(data.entities).forEach(key => {
+    // 出生点
+    if (key === 'Player') {
+      const playerData = data.entities[key][0]
+      player.pos = k.vec2(playerData.x + 8, playerData.y + 8).scale(4)
+      k.camPos(player.pos)
+    }
+    // 方块
+    if (key === 'Block') {
+      data.entities[key].forEach((blockData: any) => {
+        const type = blockData.customFields.Type
+        const block = k.add([
+          k.rect(blockData.width * 4, blockData.height * 4),
+          k.outline(4, k.rgb(84, 84, 84)),
+          k.area(),
+          k.body(),
+          k.pos(k.vec2(blockData.x + blockData.width / 2, blockData.y + blockData.height / 2).scale(4)),
+          k.anchor('center'),
+          'block',
+        ])
+        if (type === 'Gravity') {
+          block.use(k.color(166, 85, 95))
+        } else if (type === 'AntiGravity') {
+          block.use(k.color(74, 188, 255))
+          block.use(k.body({ gravityScale: 0, mass: 100 }))
+          
+          block.onUpdate(() => {
+            block.vel.y = -100
+            // block.move(0, -200)
+          })
+        }
+      })
+      // player.onCollide('block', (block) => {
+      //   block.use(k.body({ isStatic: true }))
+      // })
+      // player.onCollideEnd('block', (block) => {
+      //   block.use(k.body())
+      // })
+    }
+    // 传送门
+    if (key === 'Portal') {
+      data.entities[key].forEach((protalData: any) => {
+        k.add([
+          k.sprite('portal'),
+          k.pos(k.vec2(protalData.x + 8, protalData.y + 8).scale(4)),
+          k.anchor('center'),
+          k.area(),
+          k.body({ isStatic: true }),
+          'portal',
+        ])
+      })
+      player.onCollide('portal', () => {
+        if (state.showTransition) {
+          return
+        }
+        state.showTransition = true
+        state.transitionTime = 0
+        setTimeout(() => {
+          k.go('game', mapId + 1)
+        }, 1000)
+        setTimeout(() => {
+          state.showTransition = false
+        }, 2000)
+      })
+    }
   })
   k.onCollide('bullet', 'block', (bullet, block) => {
     k.addKaboom(bullet.pos, {
@@ -289,5 +302,3 @@ k.scene('game', (mapId: number) => {
     }
   })
 })
-
-k.go('game', 0)
