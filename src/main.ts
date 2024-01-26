@@ -10,8 +10,8 @@ const state = {
   showTransition: false,
   transitionTime: 0,
 }
-let staticDataList: string[][] = []
-let mapDataList: any[] = []
+let staticDataList: { [key: number]: any } = {}
+let mapDataList: { [key: number]: any } = {}
 // k.debug.inspect = true
 k.setGravity(1500)
 
@@ -70,12 +70,12 @@ k.load(new Promise<void>(async resolve => {
       }
     }).then(res => res.text()).then(data => {
       const staticData = data.split('\n').map((row: string) => row.replace(/,/g, ''))
-      staticDataList.push(staticData)
+      staticDataList[i] = staticData
     })
     await fetch(`map/simplified/Level_${i}/data.json`)
     .then(res => res.json())
     .then(data => {
-      mapDataList.push(data)
+      mapDataList[i] = data
     })
   })
 
