@@ -81,8 +81,11 @@ k.load(new Promise<void>(async resolve => {
 
   await Promise.all(fetchPromises)
   resolve()
-  k.go('game', 0)
 }))
+
+k.onLoad(() => {
+  k.go('game', 0)
+})
 
 k.scene('game', (mapId: number) => {
   // 初始化背景
